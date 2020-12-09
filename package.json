@@ -1,0 +1,22 @@
+{
+  "name": "menu-text-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaeyoungchang5/menu-text-app.git"
+  },
+  "author": "JaeYoung Chang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaeyoungchang5/menu-text-app/issues"
+  },
+  "homepage": "https://github.com/jaeyoungchang5/menu-text-app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
