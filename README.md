@@ -13,6 +13,7 @@ npm install
 
 ## Running the backend (Express server)
 ```bash
+cd backend
 node server.js
 ```
 
