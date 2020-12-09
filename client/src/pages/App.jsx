@@ -11,11 +11,11 @@ class App extends Component {
 		data: null
 	};
 
-	componentDidMount(){
-		this.callBackendAPI()
-			.then(res => this.setState({data:res.express}))
-			.catch(err => console.log(err));
-	}
+	// componentDidMount(){
+	// 	this.callBackendAPI()
+	// 		.then(res => this.setState({data:res.express}))
+	// 		.catch(err => console.log(err));
+	// }
 
 	callBackendAPI = async() => {
 		const response = await fetch('/api');
@@ -33,13 +33,13 @@ class App extends Component {
 				<Nav />
 
 				<Switch>
-					<Route path="/login">
+					<Route path='/login'>
 						<Login />
 					</Route>
-					<Route path="/signup">
+					<Route path='/signup'>
 						<Signup />
 					</Route>
-					<Route path="/">
+					<Route path='/'>
 						<Home />
 					</Route>
 				</Switch>
