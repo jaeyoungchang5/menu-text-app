@@ -14,7 +14,7 @@ function Footer() {
             </Card.Body>
             <Card.Footer>@2020 Copyright</Card.Footer>
         </Card>
-    )
+    );
 }
 
 export default Footer;

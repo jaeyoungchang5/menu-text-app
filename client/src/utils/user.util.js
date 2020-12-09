@@ -20,11 +20,11 @@ function signup(credentials){
     })
     .then(res => {
         if (res.ok) return res.json();
-        throw new Error('Email already taken!');
+        throw new Error('Email, username, or phone number has already been taken!');
     });
 }
 
 export default {
     login,
     signup
-}
+};

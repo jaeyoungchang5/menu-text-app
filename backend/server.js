@@ -13,5 +13,5 @@ require('./config/user.database');
 app.use('/api', routes);
 
 app.listen(backend_port, () => {
-    console.log('Backend: Server is listening on port ' + backend_port)
+    console.log('Backend: Server is listening on port ' + backend_port);
 });

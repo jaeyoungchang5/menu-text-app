@@ -13,7 +13,7 @@ function Menu() {
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
-    )
+    );
 }
 
 export default Menu;

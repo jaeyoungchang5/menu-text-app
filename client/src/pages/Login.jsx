@@ -19,13 +19,13 @@ function Login() {
     }
 
     async function handleSubmit(event) {
+        event.preventDefault();
         console.log(user);
         try {
            await userUtil.login(user);
         } catch (err) {
             alert('Invalid Credientials');
         }
-        event.preventDefault();
     }
 
     return (

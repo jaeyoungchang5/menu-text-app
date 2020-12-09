@@ -23,13 +23,13 @@ function Signup() {
     }
 
     async function handleSubmit(event) {
+        event.preventDefault();
         console.log(user);
         try {
             await userUtil.signup(user);
         } catch (err) {
             alert(err.message);
         }
-        event.preventDefault();
 
     }
 
