@@ -27,7 +27,6 @@ npm start
 
 ## Running the database (MongoDB)
 MonogDB database will run on localhost port 27017
-```
-bash
+```bash
 mongod
 ```
