@@ -1,14 +1,17 @@
 const express = require('express');
-const path = require('path');
+const cors  = require('cors');
 
 const app = express();
 const backend_port = 5000;
 
-app.listen(backend_port, () => {
-    console.log('Backend: Server is listening on port ' + backend_port)
-});
+app.use(express.json());
+app.use(cors());
 
-app.get('/api', (req, res) => {
-    console.log('Backend: connection is working')
-    res.send({express: 'backend is connected'});
+const routes = require('./routes/router');
+
+require('./config/user.database');
+app.use('/api', routes);
+
+app.listen(backend_port, () => {
+    console.log('Backend: Server is listening on port ' + backend_port);
 });

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Container} from 'react-bootstrap';
 
-import Nav from '../components/Nav';
+import Menu from '../components/Menu';
+import Footer from '../components/Footer';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
@@ -22,7 +24,7 @@ class App extends Component {
 		const body = await response.json();
 
 		if (response.status !== 200) {
-			throw Error(body.message)
+			throw Error(body.message);
 		}
 		return body;
 	};
@@ -30,20 +32,21 @@ class App extends Component {
 	render(){
 		return (
 			<Router>
-				<Nav />
-
-				<Switch>
-					<Route path='/login'>
-						<Login />
-					</Route>
-					<Route path='/signup'>
-						<Signup />
-					</Route>
-					<Route path='/'>
-						<Home />
-					</Route>
-				</Switch>
-
+				<Menu />
+				<Container>
+					<Switch>
+						<Route path='/login'>
+							<Login />
+						</Route>
+						<Route path='/signup'>
+							<Signup />
+						</Route>
+						<Route path='/'>
+							<Home />
+						</Route>
+					</Switch>
+				</Container>
+				{/* <Footer /> */}
 			</Router>
 		);
 	}
