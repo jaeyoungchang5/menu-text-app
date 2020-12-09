@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import userUtil from '../utils/user.util';
 
 function Signup() {
     const [user, setUser] = useState({
@@ -22,7 +23,11 @@ function Signup() {
 
     async function handleSubmit(event) {
         console.log(user);
-
+        try {
+            await userUtil.signup(user);
+        } catch (err) {
+            alert(err.message);
+        }
         event.preventDefault();
 
     }

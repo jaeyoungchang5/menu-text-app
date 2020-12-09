@@ -6,7 +6,7 @@ module.exports = {
 };
 
 async function signup(req, res){
-    console.log('Backend: Signing up');
+    console.log('USER.CONTROLLER: Signing up');
     const user = new User(req.body);
     try {
         await user.save();
@@ -17,12 +17,12 @@ async function signup(req, res){
 }
 
 async function login(req, res){
-    console.log('Backend: Logging in');
+    console.log('USER.CONTROLLER: Logging in');
     try {
         const user = await User.findOne({username: req.body.username});
 
         if (!user){
-            res.status(401).json({err: 'Bad credentials'});
+            res.status(404).json({err: 'Bad credentials'});
             return;
         }
 

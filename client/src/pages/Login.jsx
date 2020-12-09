@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import userUtil from '../utils/user.util';
 
 function Login() {
     const [user, setUser] = useState({
@@ -18,9 +19,12 @@ function Login() {
 
     async function handleSubmit(event) {
         console.log(user);
-
+        try {
+           await userUtil.login(user);
+        } catch (err) {
+            alert('Invalid Credientials');
+        }
         event.preventDefault();
-
     }
 
     return (

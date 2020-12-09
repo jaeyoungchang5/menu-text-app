@@ -7,5 +7,5 @@ mongoose.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true,
 const db = mongoose.connection;
 
 db.once('connected', () => {
-    console.log('Connected to MongoDB ' + db.name + ' at ' + db.host + ': ' + db.port);
+    console.log('Backend: Connected to MongoDB ' + db.name + ' at ' + db.host + ': ' + db.port);
 })
