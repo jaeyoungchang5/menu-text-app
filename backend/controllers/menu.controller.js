@@ -30,7 +30,7 @@ function postMenu(req, res){
             res.status(400).json({message: "Menu already exists"});
             return;
         }
-        
+
         menu.save()
         .then(newMenu => {
             console.log('MENU.CONTROLLER: post menu success');
@@ -42,7 +42,16 @@ function postMenu(req, res){
 }
 
 function putMenu(req, res){
-    console.log(req.params.date);
+    Menu.updateOne(req.params, {$set: req.body})
+    .then(dbResponse => {
+        if (dbResponse.nModified == 1){
+            res.status(200).json({result: 'success', message: 'Menu update successful'});
+        } else {
+            res.status(404).json({result: 'Menu not found'});
+        }
+    }).catch(err => {
+        res.status(500).json(err.message);
+    });
 
 }
 
@@ -52,7 +61,7 @@ function deleteMenu(req, res){
         if (dbResponse.deletedCount == 1){
             res.status(200).json({result: 'success', message: 'Menu delete successful'});
         } else {
-            res.status(400).json({result: 'No menu found'});
+            res.status(404).json({result: 'Menu not found'});
         }
     }).catch(err => {
         res.status(500).json(err.message);
