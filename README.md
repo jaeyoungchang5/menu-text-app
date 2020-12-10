@@ -30,3 +30,6 @@ MonogDB database will run on localhost port 27017
 ```bash
 mongod
 ```
+
+## User Authentication
+User passwords are encrypted using the [bcrypt npm package](https://www.npmjs.com/package/bcrypt)
