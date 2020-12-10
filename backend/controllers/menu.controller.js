@@ -30,7 +30,6 @@ function postMenu(req, res){
             res.status(400).json({message: "Menu already exists"});
             return;
         }
-
         menu.save()
         .then(newMenu => {
             console.log('MENU.CONTROLLER: post menu success');
