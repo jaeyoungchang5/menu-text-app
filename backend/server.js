@@ -9,7 +9,7 @@ app.use(cors());
 
 const routes = require('./routes/router');
 
-require('./config/user.database');
+require('./config/database');
 app.use('/api', routes);
 
 app.listen(backend_port, () => {
