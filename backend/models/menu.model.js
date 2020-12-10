@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const menuSchema = new mongoose.Schema({
     date: {
-        type: Date, // 'YYYY-MM-DD'
+        type: String, // 'YYYY-MM-DD'
         required: true
     },
     day: {
