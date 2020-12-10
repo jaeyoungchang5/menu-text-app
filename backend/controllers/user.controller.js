@@ -29,13 +29,15 @@ async function login(req, res){
             return;
         }
 
-        if (req.body.password === user.password){
-            console.log('Found user: Correct password');
-            res.status(200).json({result: 'success', message: 'Login successful'});
-        } else {
-            console.log('Found user: Incorrect password');
-            res.status(400).json({result: 'error', message: 'Incorrect password'});
-        }
+        user.checkPassword(req.body.password, (err,result) => {
+            if (result){
+                console.log('Found user: Correct password');
+                res.status(200).json({result: 'success', message: 'Login successful'});
+            } else {
+                console.log('Found user: Incorrect password');
+                res.status(400).json({result: 'error', message: 'Incorrect password'});
+            }
+        });
 
 
     } catch (err) {
