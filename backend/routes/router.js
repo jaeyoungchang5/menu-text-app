@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const menusCtrl = require('../controllers/menu.controller');
 const usersCtrl = require('../controllers/user.controller');
 const auth = require('../config/auth');
 /*---------- Public Routes ----------*/
@@ -10,5 +11,11 @@ router.post('/login', usersCtrl.login);
 router.get('/test', auth, (req,res) => {
     res.json(req.user);
 });
+
+/* menu */
+router.get('/menu/:date/:meal/:diningHall', menusCtrl.getMenu);
+router.post('/menu/', menusCtrl.postMenu);
+router.put('/menu/:date/:meal', menusCtrl.putMenu);
+router.delete('/menu/:date/:meal', menusCtrl.deleteMenu);
 
 module.exports = router;
