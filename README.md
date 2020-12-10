@@ -1,4 +1,9 @@
 # Menu Text App
+Automated menu texting app built with a MERN stack (MongoDB, Express, React, Node). Built for use at the University of Notre Dame ☘️
+
+Users can securely login/signup and configure a detailed schedule for menu text notifications. Schedules can be made for each day of the week (*Sunday - Saturday*). For each day, the user will choose the **meal** (*Breakfast, Lunch, Dinner*), the **dining hall** (*North Dining Hall or South Dining Hall*), and the **notification time**. 
+
+Admin can post, delete, and edit menus for a dining hall's meal on any given date.
 
 ## Installation
 ```bash
