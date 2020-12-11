@@ -37,4 +37,7 @@ mongod
 ```
 
 ## User Authentication
-User passwords are encrypted using the [bcrypt npm package](https://www.npmjs.com/package/bcrypt)
+User passwords are encrypted using the [bcrypt](https://www.npmjs.com/package/bcrypt) npm package
+
+## User Sessions
+User sessions are managed with tokens using [jswonwebtoken (jwt)](https://www.npmjs.com/package/jsonwebtoken) npm package
