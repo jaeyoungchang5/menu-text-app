@@ -61,7 +61,7 @@ function getToken(){
 function getUserFromToken(){
     const token = getToken();
     console.log('got token ' + token);
-    return token;
+    return token ? JSON.parse(atob(token.split('.')[1])): null;
 }
 
 function removeToken(){

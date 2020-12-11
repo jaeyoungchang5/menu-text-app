@@ -13,7 +13,7 @@ function Menu(props) {
     } else {
         userPortal = 
             <div>
-                <Nav.Link href="/">User</Nav.Link>
+                <Nav.Link href="/">{props.user.username}</Nav.Link>
                 <Nav.Link href="/" onClick={props.handleLogout}>Logout</Nav.Link>
             </div>
     }
