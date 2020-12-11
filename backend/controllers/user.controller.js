@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     signup,
@@ -11,7 +12,10 @@ async function signup(req, res){
     try {
         console.log('USER.CONTROLLER: signup succes');
         await user.save();
-        res.status(201).json({result: 'success', message: 'Signup successful'});
+
+        const token = createToken(user);
+        res.header('auth-token', token);
+        res.status(201).json({result: 'success', message: 'Signup successful', token: token});
     } catch (err) {
         console.log('USER.CONTROLLER: signup error');
         console.log(err);
@@ -32,7 +36,9 @@ async function login(req, res){
         user.checkPassword(req.body.password, (err,result) => {
             if (result){
                 console.log('Found user: Correct password');
-                res.status(200).json({result: 'success', message: 'Login successful'});
+                const token = createToken(user);
+                res.header('auth-token', token);
+                res.status(200).json({result: 'success', message: 'Login successful', token: token});
             } else {
                 console.log('Found user: Incorrect password');
                 res.status(400).json({result: 'error', message: 'Incorrect password'});
@@ -46,4 +52,8 @@ async function login(req, res){
         res.status(401).json(err);
         return;
     } 
+}
+
+function createToken(user) {
+    return jwt.sign({_id: user._id}, process.env.ACCESS_TOKEN_SECRET);
 }
