@@ -9,6 +9,9 @@ function login(credentials){
     .then(res => {
         if (res.ok) return res.json();
         throw new Error('Bad credentials!');
+    })
+    .then(({token}) => {
+        createToken(token);
     });
 }
 
@@ -21,10 +24,47 @@ function signup(credentials){
     .then(res => {
         if (res.ok) return res.json();
         throw new Error('Email, username, or phone number has already been taken!');
+    })
+    .then(({token}) => {
+        createToken(token);
     });
+}
+
+function getUser(){
+    return getUserFromToken();
+}
+
+function logout(){
+    removeToken();
 }
 
 export default {
     login,
-    signup
+    signup,
+    getUser,
+    logout
 };
+
+function createToken(token){
+    console.log('creating token ' + token);
+    if (token) {
+        localStorage.setItem('token', token);
+    } else {
+        localStorage.removeItem('token');
+    }
+}
+
+function getToken(){
+    return localStorage.getItem('token');
+}
+
+function getUserFromToken(){
+    const token = getToken();
+    console.log('got token ' + token);
+    return token;
+}
+
+function removeToken(){
+    localStorage.removeItem('token');
+    console.log('removed token');
+}

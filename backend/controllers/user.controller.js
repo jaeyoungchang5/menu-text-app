@@ -55,5 +55,5 @@ async function login(req, res){
 }
 
 function createToken(user) {
-    return jwt.sign({_id: user._id}, process.env.ACCESS_TOKEN_SECRET);
+    return jwt.sign({_id: user._id, username: user.username}, process.env.ACCESS_TOKEN_SECRET);
 }
