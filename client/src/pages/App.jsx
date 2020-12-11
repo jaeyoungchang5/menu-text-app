@@ -9,11 +9,13 @@ import Footer from '../components/Footer';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
+import UserPage from './UserPage';
 import userUtil from '../utils/user.util';
 
 function App() {
-	const user = userService.getUser();
-	
+	let userTemp = userService.getUser()
+	const user = userTemp ? userTemp.user : null;
+
 	function handleLogout(){
 		userUtil.logout();
 	}
@@ -23,6 +25,10 @@ function App() {
 			<Menu user={user} handleLogout={handleLogout} />
 			<Container>
 				<Switch>
+					<Route 
+						path='/user/:username' 
+						component={params => <UserPage user={user} params={params} />} 
+					/>
 					<Route path='/login'>
 						<Login />
 					</Route>
@@ -30,7 +36,7 @@ function App() {
 						<Signup />
 					</Route>
 					<Route path='/'>
-						<Home />
+						<Home user={user} />
 					</Route>
 				</Switch>
 			</Container>

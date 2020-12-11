@@ -6,16 +6,16 @@ function Menu(props) {
     let userPortal;
     if (props.user == null) {
         userPortal =
-            <div>
+            <Nav className="mr-auto">
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/signup">Signup</Nav.Link>
-            </div>
+            </Nav>
     } else {
         userPortal = 
-            <div>
-                <Nav.Link href="/">{props.user.username}</Nav.Link>
+            <Nav className="mr-auto">
+                <Nav.Link href={"/user/" + props.user.username}>{props.user.username}</Nav.Link>
                 <Nav.Link href="/" onClick={props.handleLogout}>Logout</Nav.Link>
-            </div>
+            </Nav>
     }
     
     return (
@@ -23,9 +23,7 @@ function Menu(props) {
             <Navbar.Brand href="/">Menu Text App</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    {userPortal}
-                </Nav>
+                {userPortal}
             </Navbar.Collapse>
         </Navbar>
     );
