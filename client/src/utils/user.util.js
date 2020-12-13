@@ -53,12 +53,22 @@ function putSchedule(username, masterSchedule){
     });
 }
 
+function getMasterSchedule(username){
+    return fetch('http://localhost:5000/api/' + username + '/master-schedule')
+    .then(res => res.json())
+    .then(json => {
+        console.log(json);
+        return json;
+    });
+}
+
 export default {
     login,
     signup,
     getUser,
     logout,
-    putSchedule
+    putSchedule,
+    getMasterSchedule
 };
 
 function createToken(token){

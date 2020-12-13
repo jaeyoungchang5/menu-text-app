@@ -9,6 +9,7 @@ const auth = require('../config/auth');
 router.post('/signup', usersCtrl.signup);
 router.post('/login', usersCtrl.login);
 router.put('/:username/schedule', usersCtrl.putSchedule);
+router.get('/:username/master-schedule', usersCtrl.getMasterSchedule);
 router.get('/test', auth, (req,res) => {
     res.json(req.user);
     console.log('sup');
