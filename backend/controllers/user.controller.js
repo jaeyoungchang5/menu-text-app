@@ -55,18 +55,16 @@ function createToken(user) {
 }
 
 function putSchedule(req, res) {
-    if (req.params.username != req.user.user.username){
-        res.status(400).json({result: 'error', message: 'Invalid access'});
-        return;
-    }
+
+    console.log('USER.CONTROLLER: put schedule');
+    // if (req.params.username != req.user.user.username){
+    //     res.status(400).json({result: 'error', message: 'Invalid access'});
+    //     return;
+    // }
 
     const schedule = req.body;
-    User.updateOne({username: req.params.username, 'schedule.day': schedule.day, 'schedule.meal': schedule.meal}, 
-        {'$set': {
-            'schedule.$.alertOn': schedule.alertOn,
-            'schedule.$.time': schedule.time,
-            'schedule.$.diningHall': schedule.diningHall
-        }}
+    User.updateOne({username: req.params.username}, 
+        {$set: {'schedule': schedule}}
     ).then(dbResponse => {
         if (dbResponse.nModified == 1){
             res.status(200).json({result: 'success', message: 'User schedule update successful'});

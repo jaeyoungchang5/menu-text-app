@@ -1,31 +1,31 @@
 import React from 'react';
 import {CardGroup, Card} from 'react-bootstrap';
 
-function ScheduleItem(props){
+function ScheduleItemView(props){
     return (
         <div>
             <CardGroup>
                 <Card><Card.Body>
                     <Card.Text>
-                        {props.day}
+                        {props.schedule.day}
                     </Card.Text>
                 </Card.Body></Card>
                 
                 <Card><Card.Body>
                     <Card.Text>
-                        {props.meal}
+                        {props.schedule.meal}
                     </Card.Text>
                 </Card.Body></Card>
 
                 <Card><Card.Body>
                     <Card.Text>
-                        {props.diningHall}
+                        {props.schedule.diningHall}
                     </Card.Text>
                 </Card.Body></Card>
 
                 <Card><Card.Body>
                     <Card.Text>
-                        {props.time}
+                        {props.schedule.time}
                     </Card.Text>
                 </Card.Body></Card>
             </CardGroup>
@@ -34,4 +34,4 @@ function ScheduleItem(props){
     );
 }
 
-export default ScheduleItem;
+export default ScheduleItemView;
