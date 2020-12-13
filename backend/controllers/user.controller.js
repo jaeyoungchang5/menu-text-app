@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     signup,
-    login
+    login,
+    putSchedule
 };
 
 function signup(req, res){
@@ -51,4 +52,28 @@ function login(req, res){
 
 function createToken(user) {
     return jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET);
+}
+
+function putSchedule(req, res) {
+    if (req.params.username != req.user.user.username){
+        res.status(400).json({result: 'error', message: 'Invalid access'});
+        return;
+    }
+
+    const schedule = req.body;
+    User.updateOne({username: req.params.username, 'schedule.day': schedule.day, 'schedule.meal': schedule.meal}, 
+        {'$set': {
+            'schedule.$.alertOn': schedule.alertOn,
+            'schedule.$.time': schedule.time,
+            'schedule.$.diningHall': schedule.diningHall
+        }}
+    ).then(dbResponse => {
+        if (dbResponse.nModified == 1){
+            res.status(200).json({result: 'success', message: 'User schedule update successful'});
+        } else {
+            res.status(200).json({result: 'Nothing updated'});
+        }
+    }).catch(err => {
+        res.status(500).json(err.message);
+    });
 }

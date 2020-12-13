@@ -8,6 +8,7 @@ const auth = require('../config/auth');
 /* user */
 router.post('/signup', usersCtrl.signup);
 router.post('/login', usersCtrl.login);
+router.put('/:username/schedule', auth, usersCtrl.putSchedule);
 router.get('/test', auth, (req,res) => {
     res.json(req.user);
 });

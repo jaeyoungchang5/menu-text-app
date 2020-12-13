@@ -7,7 +7,7 @@ function UserSchedule(props){
     return (
         <div>
             <h2>Here is your schedule:</h2>
-            {props.user.alertTimes.map((scheduleItem, index) => {
+            {props.user.schedule.map((scheduleItem, index) => {
                 return (
                     <ScheduleItem 
                         key={index}

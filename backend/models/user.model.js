@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    alertTimes: [{
+    schedule: [{
         alertOn: {
             type: Boolean,
             required: true
@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
         },
         time: {
             type: String,
-            match: '([01]\d|2[0-3]):[0-5]\d',
+            match: '(([01]\d)|(2[0-3])):[0-5]\d',
             required: true
         },
         meal: {
@@ -63,7 +63,7 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', function(next){
     const user = this;
 
-    user.alertTimes = defaultAlertTimes();
+    user.schedule = defaultSchedule();
 
     bcrypt.hash(user.password, 10, function(err, hash) {
         if (err) return next(err);
@@ -76,11 +76,11 @@ userSchema.methods.checkPassword = function(password, params) {
     bcrypt.compare(password, this.password, params);
 }
 
-function defaultAlertTimes(){
-    let alertTimes = [];
+function defaultSchedule(){
+    let schedule = [];
     for (d in days){
         for (m in meals){
-            alertTimes.push({
+            schedule.push({
                 alertOn: false,
                 day: days[d],
                 time: '00:00',
@@ -89,7 +89,7 @@ function defaultAlertTimes(){
             });
         }
     }
-    return alertTimes;
+    return schedule;
 }
 
 module.exports = mongoose.model('user', userSchema);
