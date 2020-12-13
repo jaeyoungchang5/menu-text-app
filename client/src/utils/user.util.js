@@ -38,11 +38,27 @@ function logout(){
     removeToken();
 }
 
+function putSchedule(username, masterSchedule){
+    return fetch('http://localhost:5000/api/' + username + '/schedule', {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(masterSchedule)
+    })
+    .then(res => {
+
+        // if res == 200, success
+        // if res == 201(?), nothing was updated
+        if (res.ok) return res.json();
+        throw new Error('Schedule not able to update');
+    });
+}
+
 export default {
     login,
     signup,
     getUser,
-    logout
+    logout,
+    putSchedule
 };
 
 function createToken(token){
