@@ -4,7 +4,7 @@ const { all } = require('../routes/router');
 module.exports = {
     getMenu,
     getAllMenu,
-    getWeekMenu,
+    getWeekMenuForDiningHall,
     postMenu,
     putMenu,
     deleteMenu
@@ -41,12 +41,12 @@ function getAllMenu(req, res){
     })
 }
 
-function getWeekMenu(req, res){
+function getWeekMenuForDiningHall(req, res){
     console.log('MENU.CONTROLLER: get week menu');
-    Menu.find({weekNum: parseInt(req.params.weekNum)}).sort({date: 1}).
+    Menu.find({weekNum: parseInt(req.params.weekNum), diningHall: req.params.diningHall}).sort({date: 1}).
     then(weekMenus => {
         if (!weekMenus){
-            res.status(404).json({result: 'error', message: 'Menus not found for week'});
+            res.status(404).json({result: 'error', message: 'Menus not found for week for dining hall'});
             return;
         }
 

@@ -3,20 +3,24 @@ import { Button, Jumbotron } from 'react-bootstrap';
 
 import menuUtil from '../utils/menu.util';
 
-import MenuItem from '../components/MenuItem';
+import MenuItem from '../components/Menu/MenuItem';
 
 function MenuPage(props){
 
     const [menu, setMenu] = useState([]);
     const [weekNum, setWeekNum] = useState(getCurrentWeekNum());
+    const [diningHall, setDiningHall] = useState("North Dining Hall");
+
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     // on componentDidMount
     useEffect(() => {
-        getWeekMenu(weekNum);
+        getWeekMenuForDiningHall(weekNum, diningHall);
     }, []);
 
-    function getWeekMenu(searchWeekNum){
-        menuUtil.getWeekMenu(searchWeekNum)
+    function getWeekMenuForDiningHall(searchWeekNum, searchDiningHall){
+        searchDiningHall = searchDiningHall.split(" ").join("%20")
+        menuUtil.getWeekMenuForDiningHall(searchWeekNum, searchDiningHall)
         .then(res => {
             setMenu(res);
             return;
@@ -30,22 +34,31 @@ function MenuPage(props){
         return Math.ceil( (yearStart.getDay() + 1 + numDays ) / 7 );
     }
 
+    function updateDiningHall(event){
+        setDiningHall(event.target.value);
+        getWeekMenuForDiningHall(weekNum, event.target.value);
+    }
+
     function decrementWeekNum(){
         let newWeekNum = weekNum - 1;
         setWeekNum(newWeekNum);
-        getWeekMenu(newWeekNum);
+        getWeekMenuForDiningHall(newWeekNum, diningHall);
     }
 
     function incrementWeekNum(){
         let newWeekNum = weekNum + 1;
         setWeekNum(newWeekNum);
-        getWeekMenu(newWeekNum);
+        getWeekMenuForDiningHall(newWeekNum, diningHall);
     }
 
     return (
         <div>
             <Jumbotron>
                 <h1>Menus</h1>
+                <select defaultValue={diningHall} onChange={updateDiningHall} name="diningHall">
+                    <option value="North Dining Hall">North Dining Hall</option>
+                    <option value="South Dining Hall">South Dining Hall</option>
+                </select>
             </Jumbotron>
 
             <div className="menu-week-selector">
@@ -58,12 +71,12 @@ function MenuPage(props){
                 </Button>
             </div>
 
-            {menu.map((menuItem, index) => {
+            {days.map((day, index) => {
                 return (
                     <MenuItem
                         key={index}
-                        menu={menuItem}
-                        setMenu={setMenu}
+                        menu={menu.filter(menuItem => menuItem.day == day)}
+                        day={day}
                     />
                 );
             })}

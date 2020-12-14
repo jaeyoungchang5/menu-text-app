@@ -18,7 +18,7 @@ router.get('/test', auth, (req,res) => {
 /* menu */
 router.get('/menu/:diningHall/:date/:meal', menusCtrl.getMenu);
 router.get('/menu/all', menusCtrl.getAllMenu);
-router.get('/menu/week/:weekNum', menusCtrl.getWeekMenu);
+router.get('/menu/week:weekNum/:diningHall', menusCtrl.getWeekMenuForDiningHall);
 router.post('/menu/', menusCtrl.postMenu);
 router.put('/menu/:diningHall/:date/:meal', menusCtrl.putMenu);
 router.delete('/menu/:diningHall/:date/:meal', menusCtrl.deleteMenu);

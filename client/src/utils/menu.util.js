@@ -8,8 +8,8 @@ function getAllMenu(){
     });
 }
 
-function getWeekMenu(weekNum){
-    return fetch('http://localhost:5000/api/menu/week/' + weekNum)
+function getWeekMenuForDiningHall(weekNum, diningHall){
+    return fetch('http://localhost:5000/api/menu/week' + weekNum + '/' + diningHall)
     .then(res => res.json())
     .then(json => {
         return json;
@@ -18,5 +18,5 @@ function getWeekMenu(weekNum){
 
 export default {
     getAllMenu,
-    getWeekMenu
+    getWeekMenuForDiningHall
 }
