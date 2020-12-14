@@ -1,7 +1,9 @@
 const Menu = require('../models/menu.model');
+const { all } = require('../routes/router');
 
 module.exports = {
     getMenu,
+    getAllMenu,
     postMenu,
     putMenu,
     deleteMenu
@@ -18,6 +20,24 @@ function getMenu(req, res){
     }).catch(err => {
         res.status(500).json(err.message);
     });
+}
+
+function getAllMenu(req, res){
+    console.log('MENU.CONTROLLER: get all menus');
+    Menu.find()
+    .then(allMenus => {
+        if (!allMenus){
+            res.status(404).json({result: 'error', message: 'Menus not found'});
+            return;
+        }
+
+        res.status(200).json(allMenus);
+    }).catch(err => {
+        console.log('weird error');
+        console.log(err);
+        res.status(401).json(err);
+        return;
+    })
 }
 
 function postMenu(req, res){

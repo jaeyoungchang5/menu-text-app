@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Button } from 'react-bootstrap';
 import userUtil from '../utils/user.util';
 
@@ -6,8 +6,17 @@ import ScheduleItemView from './ScheduleItemView';
 import ScheduleItemEdit from './ScheduleItemEdit';
 
 function UserSchedule(props){
-    const [schedule, setSchedule] = useState(props.user.schedule);
+    const [schedule, setSchedule] = useState([]);
     const [option, setOption] = useState('Edit');
+
+    // on componentDidMount
+    useEffect(() => {
+        userUtil.getMasterSchedule(props.user.username)
+        .then(res => {
+            setSchedule(res);
+            return;
+        })
+    }, []);
 
     function handleSubmit(event){
         event.preventDefault();

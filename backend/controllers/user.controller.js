@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     signup,
     login,
-    putSchedule
+    putSchedule,
+    getMasterSchedule
 };
 
 function signup(req, res){
@@ -51,7 +52,7 @@ function login(req, res){
 }
 
 function createToken(user) {
-    return jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET);
+    return jwt.sign({user: {username: user.username, fName: user.fName, lName: user.lName}}, process.env.ACCESS_TOKEN_SECRET);
 }
 
 function putSchedule(req, res) {
@@ -69,9 +70,30 @@ function putSchedule(req, res) {
         if (dbResponse.nModified == 1){
             res.status(200).json({result: 'success', message: 'User schedule update successful'});
         } else {
-            res.status(200).json({result: 'Nothing updated'});
+            res.status(202).json({result: 'Nothing updated'});
         }
     }).catch(err => {
         res.status(500).json(err.message);
     });
+}
+
+function getMasterSchedule(req, res){
+    console.log('USER.CONTROLLER: getMasterSchedule');
+    User.findOne({username: req.params.username})
+    .then(foundUser => {
+        if (!foundUser){
+            res.status(404).json({result: 'error', message: 'Username not found'});
+            return;
+        }
+
+        const schedule = foundUser.schedule;
+        res.status(200).json(schedule);
+
+    }).catch(err => {
+        console.log('weird error');
+        console.log(err);
+        res.status(401).json(err);
+        return;
+    });
+
 }
