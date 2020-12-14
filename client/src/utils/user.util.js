@@ -57,7 +57,6 @@ function getMasterSchedule(username){
     return fetch('http://localhost:5000/api/' + username + '/master-schedule')
     .then(res => res.json())
     .then(json => {
-        console.log(json);
         return json;
     });
 }
