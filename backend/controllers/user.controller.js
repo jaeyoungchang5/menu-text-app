@@ -70,7 +70,7 @@ function putSchedule(req, res) {
         if (dbResponse.nModified == 1){
             res.status(200).json({result: 'success', message: 'User schedule update successful'});
         } else {
-            res.status(200).json({result: 'Nothing updated'});
+            res.status(202).json({result: 'Nothing updated'});
         }
     }).catch(err => {
         res.status(500).json(err.message);

@@ -23,6 +23,7 @@ router.delete('/menu/:diningHall/:date/:meal', menusCtrl.deleteMenu);
 
 /* menu */
 router.get('/menu/:diningHall/:date/:meal', menusCtrl.getMenu);
+router.get('/menu/all', menusCtrl.getAllMenu);
 router.post('/menu/', menusCtrl.postMenu);
 router.put('/menu/:diningHall/:date/:meal', menusCtrl.putMenu);
 router.delete('/menu/:diningHall/:date/:meal', menusCtrl.deleteMenu);
