@@ -26,10 +26,10 @@ function App() {
 			<Navigation user={user} handleLogout={handleLogout} />
 			<Container>
 				<Switch>
-					<Route 
-						path='/user/:username' 
-						component={params => <UserPage user={user} params={params} />} 
-					/>
+					<Route path='/user/:username'>
+						<UserPage user={user} />
+					</Route>
+
 					<Route path='/login'>
 						<Login />
 					</Route>

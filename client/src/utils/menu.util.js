@@ -8,6 +8,15 @@ function getAllMenu(){
     });
 }
 
+function getWeekMenu(weekNum){
+    return fetch('http://localhost:5000/api/menu/week/' + weekNum)
+    .then(res => res.json())
+    .then(json => {
+        return json;
+    });
+}
+
 export default {
-    getAllMenu
+    getAllMenu,
+    getWeekMenu
 }

@@ -4,6 +4,7 @@ const { all } = require('../routes/router');
 module.exports = {
     getMenu,
     getAllMenu,
+    getWeekMenu,
     postMenu,
     putMenu,
     deleteMenu
@@ -24,7 +25,7 @@ function getMenu(req, res){
 
 function getAllMenu(req, res){
     console.log('MENU.CONTROLLER: get all menus');
-    Menu.find()
+    Menu.find().sort({date: 1})
     .then(allMenus => {
         if (!allMenus){
             res.status(404).json({result: 'error', message: 'Menus not found'});
@@ -32,6 +33,24 @@ function getAllMenu(req, res){
         }
 
         res.status(200).json(allMenus);
+    }).catch(err => {
+        console.log('weird error');
+        console.log(err);
+        res.status(401).json(err);
+        return;
+    })
+}
+
+function getWeekMenu(req, res){
+    console.log('MENU.CONTROLLER: get week menu');
+    Menu.find({weekNum: parseInt(req.params.weekNum)}).sort({date: 1}).
+    then(weekMenus => {
+        if (!weekMenus){
+            res.status(404).json({result: 'error', message: 'Menus not found for week'});
+            return;
+        }
+
+        res.status(200).json(weekMenus);
     }).catch(err => {
         console.log('weird error');
         console.log(err);

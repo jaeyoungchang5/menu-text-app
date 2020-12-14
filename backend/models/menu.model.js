@@ -44,10 +44,10 @@ menuSchema.pre('save', function(next){
 })
 
 function calculateWeekNum(date){
-    let dateObj = new Date(date);
+    let dateObj = new Date(date + 'T00:00:00');
     let yearStart = new Date(dateObj.getFullYear(), 0, 1);
     let numDays = Math.floor( (dateObj-yearStart)/86400000 )
-    return Math.ceil( (dateObj.getDay() + numDays ) / 7 );
+    return Math.ceil( (yearStart.getDay() + 1 + numDays ) / 7 );
 }
 
 module.exports = mongoose.model('menu', menuSchema);
