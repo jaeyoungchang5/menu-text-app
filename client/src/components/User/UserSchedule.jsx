@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Button } from 'react-bootstrap';
-import userUtil from '../utils/user.util';
+import userUtil from '../../utils/user.util';
 
 import ScheduleItemView from './ScheduleItemView';
 import ScheduleItemEdit from './ScheduleItemEdit';

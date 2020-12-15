@@ -1,21 +1,25 @@
 import React from 'react';
 import {Nav, Navbar} from 'react-bootstrap';
 
-function Menu(props) {
+function Navigation(props) {
 
     let userPortal;
     if (props.user == null) {
         userPortal =
-            <Nav className="mr-auto">
+                <Nav className="mr-auto">
+            
+                <Nav.Link href="/menus">Menus</Nav.Link>
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/signup">Signup</Nav.Link>
-            </Nav>
+                </Nav>
     } else {
         userPortal = 
-            <Nav className="mr-auto">
+                <Nav className="mr-auto">
+
+                <Nav.Link href="/menus">Menus</Nav.Link>
                 <Nav.Link href={"/user/" + props.user.username}>{props.user.username}</Nav.Link>
                 <Nav.Link href="/" onClick={props.handleLogout}>Logout</Nav.Link>
-            </Nav>
+                </Nav>
     }
     
     return (
@@ -29,4 +33,4 @@ function Menu(props) {
     );
 }
 
-export default Menu;
+export default Navigation;

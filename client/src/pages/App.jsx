@@ -4,13 +4,14 @@ import {Container} from 'react-bootstrap';
 
 import userService from '../utils/user.util';
 
-import Menu from '../components/Menu';
+import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
 import UserPage from './UserPage';
 import userUtil from '../utils/user.util';
+import MenuPage from './MenuPage';
 
 function App() {
 	let userTemp = userService.getUser()
@@ -22,19 +23,24 @@ function App() {
 
 	return (
 		<Router>
-			<Menu user={user} handleLogout={handleLogout} />
+			<Navigation user={user} handleLogout={handleLogout} />
 			<Container>
 				<Switch>
-					<Route 
-						path='/user/:username' 
-						component={params => <UserPage user={user} params={params} />} 
-					/>
+					<Route path='/user/:username'>
+						<UserPage user={user} />
+					</Route>
+
 					<Route path='/login'>
 						<Login />
 					</Route>
 					<Route path='/signup'>
 						<Signup />
 					</Route>
+
+					<Route path='/menus'>
+						<MenuPage />
+					</Route>
+
 					<Route path='/'>
 						<Home user={user} />
 					</Route>

@@ -1,3 +1,12 @@
 #menu {
     margin-bottom: 1rem;
 }
+
+.menu-week-selector>p {
+    padding: 0px 10px;
+    display: inline-block;
+}
+
+.menu-week-selector > i{
+    display: inline-block;
+}

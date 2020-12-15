@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import { Jumbotron, Tabs, Tab} from 'react-bootstrap';
+import {useParams} from 'react-router-dom';
 
-import UserSchedule from '../components/UserSchedule';
+import UserSchedule from '../components//User/UserSchedule';
 
 function UserPage(props){
     const [user, setUser] = useState(props.user);
     const [key, setKey] = useState("settings");
+    let {username} = useParams();
     if (user == null){
         return (
             <div>
@@ -15,7 +17,7 @@ function UserPage(props){
             </div>
         )
     }
-    if (user.username != props.params.match.params.username){
+    if (user.username != username){
         return (
             <div>
                 <Jumbotron>
