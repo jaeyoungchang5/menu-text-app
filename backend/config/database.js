@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 
-const databaseUrl = process.env.DATABSE_URL || 'mongodb://localhost:27017/menu-text-app-DB';
+const username = process.env.USERNAME;
+const password = process.env.PASSWORD;
+const cluster = process.env.CLUSTER;
+
+console.log(cluster);
+
+const databaseUrl = process.env.DATABSE_URL || 'mongodb+srv://' + username + ':' + password + cluster;
+console.log(databaseUrl);
 
 mongoose.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 
